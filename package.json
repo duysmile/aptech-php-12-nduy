@@ -1,0 +1,24 @@
+{
+  "name": "aptech-php",
+  "version": "1.0.aptech php couse",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namnh06/aptech-php-course.git"
+  },
+  "author": "namnh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namnh06/aptech-php-course/issues"
+  },
+  "homepage": "https://github.com/namnh06/aptech-php-course#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
+  }
+}
