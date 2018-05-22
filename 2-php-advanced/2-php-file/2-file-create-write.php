@@ -43,3 +43,25 @@ fclose($file);
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+$file = fopen('newfile.txt', 'w') or die("Cant create a new file");
+
+fwrite($file, "Hello World\n");
+fclose($file);
+
+echo readfile('newfile.txt');
+
+$file = fopen('newfile.txt', 'a+') or die('Cant open to edit file');
+
+fwrite($file, "Good bye world!");
+
+fclose($file);
+
+echo "<br>";
+
+$file = fopen('newfile.txt', 'r') or die('Cant open to read file');
+while(!feof($file)){
+    echo fgets($file) . '<br>';
+}
+
+fclose($file);
+// echo readfile('newfile.txt');

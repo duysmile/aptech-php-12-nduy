@@ -51,31 +51,40 @@ echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
         $data = htmlspecialchars($data);
         return $data;
     }
-    $err_email = "";
-    $err_pass = "";
+
+    function addToValidate($data, $arr){
+        if(validateInput($_POST[$data])){
+            $arr[$data] = validateInput($_POST[$data]);
+        }
+        return $arr;
+    }
+
+    $error = [
+        "email" => "",
+        "pass" => "",
+    ];
+
+    $validate = [
+        "email" => "",
+        "password" => "",
+    ];
+
     $myProfile = "";
+
     if(isset($_POST['login'])){
-        if(validateInput($_POST['email'])){
-            $email = validateInput($_POST['email']);
-        }
+        $validate = addToValidate('email', $validate);
+        $validate = addToValidate('password', $validate);
+        $validate = addToValidate('gender', $validate);
 
-        if(validateInput($_POST['password'])){
-            $password = validateInput($_POST['password']);
-        }
-
-        if(validateInput($_POST['gender'])){
-            $gender = validateInput($_POST['gender']);
-        }
-
-        if(!preg_match('/\w+\@\w+\.\w+/', $email)){
-            $err_email = "Invalid email";
+        if(!preg_match('/\w+\@\w+\.\w+/', $validate['email'])){
+            $error['email'] = "Invalid email";
         }
         else $err_email = "";
-        if(!preg_match('/\w{6,32}/', $password)){
-            $err_pass = "Password contains at least 6 letters.";
+        if(!preg_match('/\w{6,32}/', $validate['password'])){
+            $error['pass'] = "Password contains at least 6 letters.";
         }
         else $err_pass = "";
-        $myProfile = $_POST['email'] . ' - ' . $_POST['password'] . ' - ' . $_POST['gender'];
+        $myProfile = $validate['email'] . ' - ' . $validate['password'] . ' - ' . $validate['gender'];
     }
 ?>
 <!DOCTYPE html>
@@ -87,37 +96,51 @@ echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
+<body style="background:">
     <div class="container d-flex justify-content-center">
-        <form action="" method="POST">
+        <form action="" method="POST" style="box-shadow:2px 5px 10px 4px #eee" class="p-3">
+        <img src="https://getbootstrap.com/favicon.ico" class="d-flex m-auto pb-2">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input name="email" type="text" class="form-control" required 
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding-right: 42px">
+                        Email
+                    </span>
+                </div>
+                <input name="email" type="text" class="form-control" required placeholder="Input your email"
                     value="<?php
-                        echo ($err_email || $err_pass) ? $email : ""; 
+                        echo ($error) ? $validate['email'] : ""; 
                     ?>">
-                <span class="text-danger"><?= $err_email ?></span>
+            </div>
+            <span class="text-danger"><?= $error['email'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input name="password" type="password" class="form-control" required
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Password
+                        </span>
+                    </div>
+                    <input name="password" type="password" class="form-control" required placeholder="Input your password"
                     value="<?php
-                        echo ($err_email || $err_pass) ? $password : ""; 
+                        echo ($error) ? $validate['password'] : ""; 
                     ?>">
-                <span class="text-danger"><?= $err_pass ?></span>
+                </div>
+                <span class="text-danger"><?= $error['pass'] ?></span>
             </div>
             <div class="form-check-inline">
                 <input name="gender" type="radio" value="Male" required 
                     checked="<?php
-                        echo $gender === "Male" ? true : false;
-                    ?>"> Male
+                        echo $validate['gender'] === "Male" ? true : false;
+                    ?>"> 
+                    <span class="pr-2">Male</span>
                 <input name="gender" type="radio" value="Female" required
                     checked="<?php
-                        echo $gender === "Female" ? true : false;
+                        echo $validate['gender'] === "Female" ? true : false;
                     ?>"> Female
             </div>
             <div class="form-group mt-3">
-                <button name="login" class="btn btn-primary">
+                <button name="login" class="d-flex m-auto btn btn-primary">
                     Login   
                 </button>
             </div>

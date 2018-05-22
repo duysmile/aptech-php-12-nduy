@@ -27,3 +27,10 @@ fclose($file);
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+
+$file = fopen('text.txt', 'r') or die('Cant open file');
+while(!feof($file)){
+    echo fgets($file) . '<br>';
+}
+
+fclose($file);

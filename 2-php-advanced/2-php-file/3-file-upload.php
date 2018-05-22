@@ -76,3 +76,69 @@ echo "There was an error uploading your file";
 }
 } */
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <form class = "form-inline" enctype = "multipart/form-data" method="POST" action="">
+            <input type="file" name="uploadFile">
+            <button name="submit" type="submit">
+                Upload
+            </button>
+        </form>
+        
+    </div>    
+</body>
+</html>
+<?php
+            if(isset($_POST['submit'])){
+                if(isset($_FILES['uploadFile'])){
+                    $targetDir = 'uploads/';
+                    if(!file_exists($targetDir)){
+                        mkdir($targetDir, 0777, true);
+                    }
+                    $targetFile = $targetDir . basename($_FILES['uploadFile']['name']);
+                    $imageExtension = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+                    $isUploadFile = true;
+                    $check = getimagesize($_FILES["uploadFile"]["tmp_name"]);
+                    if($check !== false){
+                        echo 'File is an image - ' . $check['mime'] . '<br>';
+                    }    
+                    else{
+                        echo 'File is not an image.<br>';
+                        $isUploadFile = false;
+                    }
+
+                    if(file_exists($targetFile)){
+                        echo 'File is already exists.<br>';
+                        $isUploadFile = false;
+                    }
+
+                    if($_FILES['uploadFile']['size'] > 50000){
+                        echo 'File is too large.<br>';
+                        $isUploadFile = false;
+                    }
+
+                    if(!preg_match("/(gif|jpg|jpeg|png)$/i", $imageExtension)){
+                        echo "File extension is not match image type.<br>";
+                        $isUploadFile = false;
+                    }
+
+                    if($isUploadFile){
+                        move_uploaded_file($_FILES['uploadFile']['tmp_name'], $targetFile);
+                        echo 'Upload file successfully.<br>';
+                    }
+                    else{
+                        echo 'Cant upload file.';
+                    }
+                }
+            }
+        ?>
