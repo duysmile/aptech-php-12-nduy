@@ -7,7 +7,7 @@ foreach ($data[posts] as $post):  ?>
         </a>
 	</li>
 
-																	<?php
+<?php
 endforeach;
 echo "</ul>";
 ?>

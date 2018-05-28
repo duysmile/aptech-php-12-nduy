@@ -29,3 +29,11 @@ $conn->close();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+$serverName = 'localhost';
+$userName = 'root';
+$password = '123456';
+
+$conn = mysqli_connect($serverName, $userName, $password) or die ('Cannot connect to database!');
+
+echo('Connected successfully');
+$conn->close();

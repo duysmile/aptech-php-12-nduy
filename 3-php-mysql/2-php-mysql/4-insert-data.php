@@ -35,3 +35,19 @@ $conn->close();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+
+require './helper.php';
+
+$conn = connectDatabase();
+$sql = "Insert into nduy_news.nnUser (uLastName,uFirstName,uEmail,uRole)
+VALUES
+( 'Nam', 'Nguyen', 'namnh.website@gmail.com', 1),
+( 'John', 'Cenna', 'cenna.john@hotmail.com', 2),
+( 'Henry', 'Tran', 'tranhe@resolutioninc.com', 2),
+('Christiaan', 'Hunter', 'ch.pageworth@pageworth.com', 1),
+( 'Vicky', 'Nguyen', 'vicky06@gmail.com', 2)";
+
+if($conn->query($sql) === true){
+    echo 'Insert successfully!';
+}
+else echo $conn->error;

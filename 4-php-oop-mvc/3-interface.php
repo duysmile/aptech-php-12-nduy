@@ -80,3 +80,30 @@ $antimage->run()->hit()->stop();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+interface Learn
+{
+    public function selectSubject($subject);
+    public function testSubject();    
+}
+
+class Student implements Learn
+{
+    private $name;
+    private $subject;
+    public function __construct($name  ='default', $subject = 'default'){
+        $this->name = $name;
+        $this->subject = $subject;
+    }
+
+    public function selectSubject($subject){
+        $this->subject = $subject;
+    }
+
+    public function testSubject(){
+        echo $this->subject . " is a subject.";
+    }   
+}
+
+$student = new Student('Duy');
+$student->selectSubject('Math');
+$student->testSubject();

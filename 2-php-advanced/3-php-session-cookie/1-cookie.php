@@ -26,3 +26,7 @@ echo "<h1>1. COOKIE</h1>";
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+setcookie('name', 'Nguyen Duy', time() + 15);
+if($_COOKIE['name']){
+    echo "My name is " . $_COOKIE['name'];
+}

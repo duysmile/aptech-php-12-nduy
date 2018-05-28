@@ -39,3 +39,22 @@ $conn->close();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+require './helper.php';
+
+$conn = connectDatabase();
+
+$sql = 'create table nduy_news.nnUser(
+        uId int not null auto_increment primary key,
+        uLastName varchar(255),
+        uFirstName varchar(255),
+        uEmail varchar(255) not null unique,
+        uRole int not null default 2,
+        uState int not null default 1,
+        uCreatedDate datetime not null default now(),
+        uModifiedDate datetime
+    )';
+if($conn->query($sql) === true){
+    echo "Table created successfully";
+}
+else echo $conn->error;
+$conn->close();

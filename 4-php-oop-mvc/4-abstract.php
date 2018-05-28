@@ -52,3 +52,36 @@ $antimage->setName("Antimage2")->display();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+abstract class Person
+{
+    protected $name;
+    public function __construct($name = 'default'){
+        $this->name = $name;
+    }   
+    
+    abstract public function setName($name);
+    abstract public function getName();
+
+    public function displayName(){
+        echo $this->name . '<br>';
+    }
+}
+
+class Student extends Person
+{
+    public function __construct($name = 'student'){
+        parent::__construct($name);
+    }
+
+    public function setName($name){
+        $this->name = $name;
+    }
+   
+    public function getName(){
+        return $this->name;
+    }
+}
+
+$student = new Student();
+$student->setName("Duy");
+$student->displayName();

@@ -29,3 +29,10 @@ echo "<h1>2. SESSION</h1>";
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+session_start();
+$_SESSION['firstName'] = 'Duy';
+$_SESSION['lastName'] = 'Nguyen';
+
+print_r($_SESSION);
+
+session_destroy();

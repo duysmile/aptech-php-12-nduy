@@ -66,3 +66,33 @@ $nam->setName("ABC")->display();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+include './1-class.php';
+
+class Student extends Person
+{
+    private $mark;
+
+    public function __construct($name = 'Student'){
+        parent::__construct($name);
+        $this->mark = 0.0;
+    }
+
+    public function setMark($mark){
+        $this->mark = $mark;
+    }
+
+    public function getMark($mark){
+        return $this->mark;
+    }
+
+    public function displayStudent(){
+        parent::displayName();
+        echo $this->mark . '<br>';
+    }
+}
+
+$student = new Student;
+$student->displayStudent();
+$student->setName('Duy');
+$student->setMark(9.0);
+$student->displayStudent();

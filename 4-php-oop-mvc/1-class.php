@@ -53,44 +53,86 @@ $antimage->setName("ANTIMAGE")->display();
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
-class Hero
-{
+// class Hero
+// {
+//     protected $name;
+
+//     public static function helloWorld()
+//     {
+//         echo "Hello World.<br>";
+//     }
+
+//     public function __construct($name = "Undefined")
+//     {
+
+//         echo "Begin of class<br>";
+//         $this->name = $name;
+//     }
+
+//     public function setName($name)
+//     {
+//         $this->name = $name;
+//         return $this;
+//     }
+
+//     public function getName()
+//     {
+//         return $this->name;
+//     }
+
+//     public function display()
+//     {
+//         echo $this->name . "<br>";
+//     }
+
+//     public function __destruct()
+//     {
+//         echo "End of class.<br>";
+//     }
+
+// }
+// Hero::helloWorld();
+// $antimage = new Hero;
+// $antimage->setName("ANTIMAGE")->display();
+
+class Person{
     protected $name;
 
-    public static function helloWorld()
-    {
-        echo "Hello World.<br>";
+    public function __construct($name = 'default'){
+        echo "Constructor <br>";
+        $this->name = $name;    
     }
 
-    public function __construct($name = "Undefined")
-    {
-
-        echo "Begin of class<br>";
-        $this->name = $name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
+    public function __set($key, $value){
+			if($key == 'name'){
+				$this->$key = $value;
         return $this;
+			}
     }
 
-    public function getName()
-    {
-        return $this->name;
+    public function __get($key){
+			if($key == 'name'){
+				return $this->$key;
+			}	
     }
 
-    public function display()
-    {
-        echo $this->name . "<br>";
+    public function displayName(){
+        echo $this->name . '<br>    ';
     }
 
-    public function __destruct()
-    {
-        echo "End of class.<br>";
+    public function __destruct(){
+        echo "<br>";
     }
-
 }
-Hero::helloWorld();
-$antimage = new Hero;
-$antimage->setName("ANTIMAGE")->display();
+
+$person = new Person;
+$person->displayName();
+$person->__set("name", "Duy");
+echo $person->__get("name") . '<br>';
+$person->displayName();
+
+$var = duy;
+$var = serialize($var);
+echo '<br>'.$var;
+$var = unserialize($var);
+echo '<br>'.$var;

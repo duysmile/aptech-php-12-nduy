@@ -19,3 +19,5 @@ echo "<h1>4. INCLUDE & REQUIRE</h1>";
  */
 
 echo "<br><br>DO EXERCISE INSIDE COMMENT CODE BELOW THIS LINE<hr>";
+require './header.php';
+include './footer.php';
